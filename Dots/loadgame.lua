@@ -12,7 +12,7 @@ function scene:create( event )
     local sceneGroup = self.view
 
     -- completely remove mainmenu
-    composer.removeScene( "mainmenu" )
+   -- composer.removeScene( "mainmenu" )
     print( "\nloadgame: create event" )
 end
 
@@ -23,10 +23,11 @@ function scene:show( event )
     --loadingImage = display.newImageRect( "loading.png", 480, 320)
     --loadingImage.x = 240; loadingImage.y = 160
     --sceneGroup:insert( loadingImage )
-   display.newText(sceneGroup, "Loading...", WIDTH/2, HEIGHT/2, native.systemfont, 24)
+  loadingText = display.newText(sceneGroup, "Loading...", WIDTH/2, HEIGHT/2, native.systemfont, 24)
     
     local changeScene = function()
-        composer.gotoScene( "maingame", "flipFadeOutIn", 500 )
+
+        composer.gotoScene( "gameScene", "flipFadeOutIn", 500 )
     end
 
     myTimer = timer.performWithDelay( 1000, changeScene, 1 )
