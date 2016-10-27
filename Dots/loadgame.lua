@@ -2,6 +2,10 @@ local composer = require( "composer" )
 local scene = composer.newScene()
 local myTimer
 local loadingImage
+local loadingText
+
+local WIDTH = display.contentWidth
+local HEIGHT = display.contentHeight
 
 -- Called when the scene's view does not exist:
 function scene:create( event )
@@ -15,10 +19,11 @@ end
 -- Called immediately after scene has moved onscreen:
 function scene:show( event )
     local sceneGroup = self.view
-    print( "loadgame: show event" )
-    loadingImage = display.newImageRect( "loading.png", 480, 320)
-    loadingImage.x = 240; loadingImage.y = 160
-    sceneGroup:insert( loadingImage )
+   -- print( "loadgame: show event" )
+    --loadingImage = display.newImageRect( "loading.png", 480, 320)
+    --loadingImage.x = 240; loadingImage.y = 160
+    --sceneGroup:insert( loadingImage )
+   display.newText(sceneGroup, "Loading...", WIDTH/2, HEIGHT/2, native.systemfont, 24)
     
     local changeScene = function()
         composer.gotoScene( "maingame", "flipFadeOutIn", 500 )
