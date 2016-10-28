@@ -36,18 +36,16 @@ function scene:show( event )
     end
 
     playBtn = ui.newButton{
-		defaultSrc = "images/playbtn.png",
 		defaultX = 100,
 		defaultY = 100,
-		overSrc = "images/playbtn-over.png",
 		overX = 100,
 		overY = 100,
 		onEvent = onPlayTouch,
 		id = "PlayButton",
-		text = "",
-		font = "Helvetica",
+		text = "Play Game",
+		font = native.systemfont,
 		textColor = { 255, 255, 255, 255 },
-		size = 16,
+		size = 18,
 		emboss = false
 	}
 
@@ -67,18 +65,16 @@ function scene:show( event )
     end
 
     optBtn = ui.newButton{
-        defaultSrc = "images/optbtn.png",
         defaultX = 60,
         defaultY = 60,
-        overSrc = "images/optbtn-over.png",
         overX = 60,
         overY = 60,
         onEvent = onOptionsTouch,
         id = "OptionsButton",
-        text = "",
-        font = "Helvetica",
+        text = "Settings",
+        font = native.systemfont,
         textColor = { 255, 255, 255, 255 },
-        size = 16,
+        size = 18,
         emboss = false
     }
 

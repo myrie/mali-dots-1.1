@@ -113,6 +113,8 @@ function newButton( params )
 		button = display.newGroup()
 		default = display.newImageRect ( params.defaultSrc , params.defaultX , params.defaultY )
 		button:insert( default, true )
+	else
+		button = display.newGroup();
 	end
 	
 	if params.overSrc then
