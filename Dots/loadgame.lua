@@ -27,7 +27,7 @@ function scene:show( event )
     
     local changeScene = function()
 
-        composer.gotoScene( "gameScene", "flipFadeOutIn", 500 )
+        composer.gotoScene( "mainmenu", "flipFadeOutIn", 500 )
     end
 
     myTimer = timer.performWithDelay( 1000, changeScene, 1 )
