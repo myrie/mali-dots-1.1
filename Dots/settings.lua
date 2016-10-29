@@ -1,14 +1,11 @@
------------------------------------------------------------------------------------------
---
--- main.lua
---
--- Starter for the Dots project
--- Existing code works but needs to be enhanced
---
------------------------------------------------------------------------------------------
-
+-- Helper classes for creating elements
+local composer = require("composer")
 local ui = require("ui")
 
+-- Initializes the scene so that we can begin putting objects on the page
+local scene = composer.newScene()
+
+-- Helper variables for getting the max height and width of the page
 local WIDTH = display.contentWidth
 local HEIGHT = display.contentHeight
 
@@ -17,24 +14,29 @@ function scene:create( event )
     composer.removeScene( "loadgame" )
     composer.removeScene( "mainmenu" )
     composer.removeScene( "dots" )
-    print( "\nmainmenu: create event" )
+
+    print( "\n Settings: create event" )
+
+    -- Creates a label at the top of the screen
+    local settingsLabel
+    settingsLabel = display.newText(sceneGroup, "Settings", 0, 0, native.systemfont, 24)
+    settingsLabel.x = WIDTH/2
+    settingsLabel.y = 0
 end
 
 function scene:show( event )
+    local sceneGroup = self.view
+    print( "\n Settings: show event" )
 
- local sceneGroup = self.view
-    print( "\nmainmenu: show event" )
+    
+end
 
-    local playBtn
+function scene:hide()
+    print ("\n Settings: hide event")
+end
 
-    local onPlayTouch = function( event )
-         if event.phase == "release" then
-            // audio.play(btnSound)
-             composer.gotoScene( "gameScene", "fade", 300 )
-        end
-    end
-
-
+function scene:destroy(event)
+    print("\n Settings: destroy event")
 end
 
 -- "create" event is dispatched if scene's view does not exist
