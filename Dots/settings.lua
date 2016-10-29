@@ -1,12 +1,5 @@
-<<<<<<< HEAD
-
-local composer = require("composer")
-local scene = composer.newScene()
-
-=======
 -- Helper classes for creating elements
 local composer = require("composer")
->>>>>>> origin/develop
 local ui = require("ui")
 
 -- Initializes the scene so that we can begin putting objects on the page
@@ -31,7 +24,10 @@ function scene:create( event )
     settingsLabel.y = 0
 end
 
-<<<<<<< HEAD
+function scene:show( event )
+    local sceneGroup = self.view
+    print( "\n Settings: show event" )
+
     local playBtn
     
     local gridWidth = 5
@@ -40,27 +36,22 @@ end
          if event.phase == "release" then
             -- audio.play(btnSound)
             -- composer.gotoScene( "gameScene", "fade", 300 )
-            if gridthWidth < 11
-            gridWidth = gridWidth +1
+            if gridthWidth < 11 then
+                gridWidth = gridWidth +1
+            end
         end
     end
     
-     local decreaseWidth = function( event )
-         if event.phase == "release" then
-            // audio.play(btnSound)
+    local decreaseWidth = function( event )
+        if event.phase == "release" then
+            -- audio.play(btnSound)
             -- composer.gotoScene( "gameScene", "fade", 300 )
-            if gridthWidth > 2
-            gridWidth = gridWidth - 1
+            if gridthWidth > 2 then
+                gridWidth = gridWidth - 1
             end
+        end
     end
-=======
-function scene:show( event )
-    local sceneGroup = self.view
-    print( "\n Settings: show event" )
-
-    
 end
->>>>>>> origin/develop
 
 function scene:hide()
     print ("\n Settings: hide event")
