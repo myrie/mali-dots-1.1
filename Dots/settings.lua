@@ -1,11 +1,6 @@
------------------------------------------------------------------------------------------
---
--- main.lua
---
--- Starter for the Dots project
--- Existing code works but needs to be enhanced
---
------------------------------------------------------------------------------------------
+
+local composer = require("composer")
+local scene = composer.newScene()
 
 local ui = require("ui")
 
@@ -26,12 +21,25 @@ function scene:show( event )
     print( "\nmainmenu: show event" )
 
     local playBtn
-
-    local onPlayTouch = function( event )
+    
+    local gridWidth = 5
+    local gridHeight = 5
+    local increaseWidth = function( event )
+         if event.phase == "release" then
+            -- audio.play(btnSound)
+            -- composer.gotoScene( "gameScene", "fade", 300 )
+            if gridthWidth < 11
+            gridWidth = gridWidth +1
+        end
+    end
+    
+     local decreaseWidth = function( event )
          if event.phase == "release" then
             // audio.play(btnSound)
-             composer.gotoScene( "gameScene", "fade", 300 )
-        end
+            -- composer.gotoScene( "gameScene", "fade", 300 )
+            if gridthWidth > 2
+            gridWidth = gridWidth - 1
+            end
     end
 
 
