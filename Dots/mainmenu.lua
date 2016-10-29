@@ -50,17 +50,17 @@ function scene:show( event )
 	}
 
     playBtn.x = WIDTH/3; 
-    playBtn.y = HEIGHT;
+    playBtn.y = HEIGHT/2;
     sceneGroup:insert(playBtn)
 
-    btnAnim = transition.to(playBtn, {time=1000, y=260, transition=easing.inOutExpo})
+    -- btnAnim = transition.to(playBtn, {time=1000, y=260, transition=easing.inOutExpo})
 
     local optBtn
 
-    local onOptionsTouch = function( event )
+    local onSettingsTouch = function( event )
         if event.phase == "release" then
             audio.play(btnSound)
-            composer.gotoScene( "options", "crossFade", 300)
+            composer.gotoScene( "settings", "crossFade", 300)
         end
     end
 
@@ -69,8 +69,8 @@ function scene:show( event )
         defaultY = 60,
         overX = 60,
         overY = 60,
-        onEvent = onOptionsTouch,
-        id = "OptionsButton",
+        onEvent = onSettingsTouch,
+        id = "SettingsButton",
         text = "Settings",
         font = native.systemfont,
         textColor = { 255, 255, 255, 255 },
@@ -78,10 +78,10 @@ function scene:show( event )
         emboss = false
     }
 
-    optBtn.x = WIDTH/3*2; optBtn.y = HEIGHT;
+    optBtn.x = WIDTH/3*2; optBtn.y = HEIGHT/2;
     sceneGroup:insert(optBtn)
 
-    btnAnim = transition.to(optBtn, {time=1000, y=260, transition=easing.inOutExpo})
+    -- btnAnim = transition.to(optBtn, {time=1000, y=260, transition=easing.inOutExpo})
 end
 
 function scene:hide()
