@@ -14,4 +14,5 @@ local composer = require( "composer" )
 -- Now load the opening scene
 
 -- Assumes that "questionScene.lua" exists and is configured as a Composer scene
+
 composer.gotoScene( "loadgame" )
