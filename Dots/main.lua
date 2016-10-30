@@ -8,6 +8,7 @@
 -----------------------------------------------------------------------------------------
 
 local composer = require( "composer" )
+local sfx = require('sfx')
 
 -- Code to initialize the app can go here
 composer.setVariable("gridSize", 2)
