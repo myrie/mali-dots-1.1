@@ -10,6 +10,7 @@
 local composer = require( "composer" )
 
 -- Code to initialize the app can go here
+composer.setVariable("gridSize", 2)
 
 -- Now load the opening scene
 

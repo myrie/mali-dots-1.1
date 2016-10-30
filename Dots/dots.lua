@@ -33,7 +33,9 @@ dots.listeners = {} -- the game scene will register a listener
 -- methods
 
 -- reset the board for a new game
-function dots:newGame()
+function dots:newGame(lines)
+	self.listeners = {}
+	self.LINES = lines
 	self.players.red.score = 0
 	self.players.yellow.score = 0
 
@@ -88,6 +90,7 @@ end
 
 -- check if the game is over (all cells captured)
 function dots:isOver()
+	print("\n Calling is over method")
 	return self.players.red.score + self.players.yellow.score == (self.LINES-1)*(self.LINES-1)
 end
 
@@ -109,6 +112,8 @@ end
 function dots:capture( row, column )
 	self.cells[row][column].owner = self.currentPlayer
 	self.players[self.currentPlayer].score = self.players[self.currentPlayer].score + 1
+
+	-- print(string.format("\n capture player: %s, row: %d, column: %d", self.currentPlayer, row, column))
 	for i = 1, #self.listeners do
 		self.listeners[i](self.currentPlayer, row, column)
 	end

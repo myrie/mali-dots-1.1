@@ -13,8 +13,7 @@ local btnSound = audio.loadSound( "audio/btnSound.wav" )
 function scene:create( event )
     local sceneGroup = self.view
     composer.removeScene( "loadgame" )
-    composer.removeScene( "settings" )
-    composer.removeScene( "dots" )
+    
     print( "\nmainmenu: create event" )
 end
 
@@ -25,63 +24,71 @@ function scene:show( event )
     --local backgroundImage = display.newImageRect("mainMenuBG.png", 480, 320 )
     --backgroundImage.x = 240; backgroundImage.y = 160
     --sceneGroup:insert( backgroundImage )
+    local phase = event.phase
 
-    local playBtn
+    if ( phase == "will" ) then
+        composer.removeScene( "settings" )
+        composer.removeScene( "gameScene" )
 
-    local onPlayTouch = function( event )
-         if event.phase == "release" then
-             audio.play(btnSound)
-             composer.gotoScene( "gameScene", "fade", 300 )
+        local playBtn
+
+        local onPlayTouch = function( event )
+            if event.phase == "release" then
+                audio.play(btnSound)
+                composer.gotoScene( "gameScene", "fade", 300 )
+            end
         end
-    end
 
-    playBtn = ui.newButton{
-		defaultX = 100,
-		defaultY = 100,
-		overX = 100,
-		overY = 100,
-		onEvent = onPlayTouch,
-		id = "PlayButton",
-		text = "Play Game",
-		font = native.systemfont,
-		textColor = { 255, 255, 255, 255 },
-		size = 18,
-		emboss = false
-	}
+        playBtn = ui.newButton{
+            defaultX = 100,
+            defaultY = 100,
+            overX = 100,
+            overY = 100,
+            onEvent = onPlayTouch,
+            id = "PlayButton",
+            text = "Play Game",
+            font = native.systemfont,
+            textColor = { 255, 255, 255, 255 },
+            size = 18,
+            emboss = false
+        }
 
-    playBtn.x = WIDTH/3; 
-    playBtn.y = HEIGHT/2;
-    sceneGroup:insert(playBtn)
+        playBtn.x = WIDTH/3; 
+        playBtn.y = HEIGHT/2;
+        sceneGroup:insert(playBtn)
 
-    -- btnAnim = transition.to(playBtn, {time=1000, y=260, transition=easing.inOutExpo})
+        -- btnAnim = transition.to(playBtn, {time=1000, y=260, transition=easing.inOutExpo})
 
-    local optBtn
+        local optBtn
 
-    local onSettingsTouch = function( event )
-        if event.phase == "release" then
-            audio.play(btnSound)
-            composer.gotoScene( "settings", "crossFade", 300)
+        local onSettingsTouch = function( event )
+            if event.phase == "release" then
+                audio.play(btnSound)
+                composer.gotoScene( "settings", "crossFade", 300)
+            end
         end
+
+        optBtn = ui.newButton{
+            defaultX = 60,
+            defaultY = 60,
+            overX = 60,
+            overY = 60,
+            onEvent = onSettingsTouch,
+            id = "SettingsButton",
+            text = "Settings",
+            font = native.systemfont,
+            textColor = { 255, 255, 255, 255 },
+            size = 18,
+            emboss = false
+        }
+
+        optBtn.x = WIDTH/3*2; optBtn.y = HEIGHT/2;
+        sceneGroup:insert(optBtn)
+
+        -- btnAnim = transition.to(optBtn, {time=1000, y=260, transition=easing.inOutExpo})
+    elseif ( phase == "did" ) then
+        -- Code here runs when the scene is entirely on screen
     end
-
-    optBtn = ui.newButton{
-        defaultX = 60,
-        defaultY = 60,
-        overX = 60,
-        overY = 60,
-        onEvent = onSettingsTouch,
-        id = "SettingsButton",
-        text = "Settings",
-        font = native.systemfont,
-        textColor = { 255, 255, 255, 255 },
-        size = 18,
-        emboss = false
-    }
-
-    optBtn.x = WIDTH/3*2; optBtn.y = HEIGHT/2;
-    sceneGroup:insert(optBtn)
-
-    -- btnAnim = transition.to(optBtn, {time=1000, y=260, transition=easing.inOutExpo})
 end
 
 function scene:hide()

@@ -4,22 +4,19 @@ local ui = require("ui")
 
 -- Initializes the scene so that we can begin putting objects on the page
 local scene = composer.newScene()
-
+local btnSound = audio.loadSound( "audio/btnSound.wav" )
 -- Helper variables for getting the max height and width of the page
 local WIDTH = display.contentWidth
 local HEIGHT = display.contentHeight
 local gridLabel
-local gridSize
 
 function getGridLineText(gridSize)
-    return string.format("%d Grid Lines", gridSize-1);
+    return string.format("Grid Size: %d", gridSize-1);
 end
 
 function scene:create( event )
     local sceneGroup = self.view
-    composer.removeScene( "loadgame" )
-    composer.removeScene( "mainmenu" )
-    composer.removeScene( "dots" )
+    -- composer.removeScene( "mainmenu" )
 
     print( "\n Settings: create event" )
 
@@ -29,14 +26,13 @@ function scene:create( event )
     settingsLabel.x = WIDTH/2
     settingsLabel.y = 0
 
-    gridSize = 5
-
     local increaseSize = function( event )
         if event.phase == "release" then
             -- audio.play(btnSound)
-            -- composer.gotoScene( "gameScene", "fade", 300 )
+            local gridSize = composer.getVariable("gridSize")
             if gridSize < 11 then
                 gridSize = gridSize + 1
+                composer.setVariable("gridSize", gridSize)
                 gridLabel.text = getGridLineText(gridSize)
             end
         end
@@ -45,9 +41,10 @@ function scene:create( event )
     local decreaseSize = function( event )
         if event.phase == "release" then
             -- audio.play(btnSound)
-            -- composer.gotoScene( "gameScene", "fade", 300 )
+            local gridSize = composer.getVariable("gridSize")
             if gridSize > 4 then
                 gridSize = gridSize - 1
+                composer.setVariable("gridSize", gridSize)
                 gridLabel.text = getGridLineText(gridSize)
             end
         end
@@ -65,8 +62,9 @@ function scene:create( event )
         size = 18,
         emboss = false
     }
-    IncreaseButton.x = WIDTH/5
+    IncreaseButton.x = WIDTH/5 + 24
     IncreaseButton.y = 100
+    sceneGroup:insert(IncreaseButton)
 
     DecreaseButton = ui.newButton{
         onEvent = decreaseSize,
@@ -77,10 +75,32 @@ function scene:create( event )
         size = 18,
         emboss = false
     }
-    DecreaseButton.x = WIDTH/5 + 24
+    DecreaseButton.x = WIDTH/5
     DecreaseButton.y = 100
+    sceneGroup:insert(DecreaseButton)
 
-    gridLabel = display.newText(sceneGroup, getGridLineText(gridSize), WIDTH/5*3, 100, native.systemFont, 16)
+    gridLabel = display.newText(sceneGroup, getGridLineText(composer.getVariable("gridSize")), WIDTH/5*3, 100, native.systemFont, 16)
+
+    local returnHome = function(event)
+        if event.phase == "release" then
+            audio.play(btnSound)
+            composer.gotoScene( "mainmenu", "fade", 300 )
+        end
+    end
+
+    returnBtn = ui.newButton{
+        onEvent = returnHome,
+        id = "ReturnHomeBtn",
+        text = "Menu",
+        font = native.systemfont,
+        textColor = { 255, 255, 255, 255 },
+        size = 18,
+        emboss = false
+    }
+    returnBtn.x = WIDTH/2
+    returnBtn.y = HEIGHT
+
+    sceneGroup:insert(returnBtn)
 end
 
 function scene:show( event )
