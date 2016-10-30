@@ -8,6 +8,8 @@ local scene = composer.newScene()
 -- Helper variables for getting the max height and width of the page
 local WIDTH = display.contentWidth
 local HEIGHT = display.contentHeight
+local gridLabel
+local gridSize
 
 function scene:create( event )
     local sceneGroup = self.view
@@ -22,78 +24,64 @@ function scene:create( event )
     settingsLabel = display.newText(sceneGroup, "Settings", 0, 0, native.systemfont, 24)
     settingsLabel.x = WIDTH/2
     settingsLabel.y = 0
-end
 
-function scene:show( event )
-    local sceneGroup = self.view
-    print( "\n Settings: show event" )
+    gridSize = 5
 
-    local playBtn
-    
-    local gridSize = 5
-    
-    local increaseSuze = function( event )
-         if event.phase == "release" then
+    local increaseSize = function( event )
+        if event.phase == "release" then
             -- audio.play(btnSound)
             -- composer.gotoScene( "gameScene", "fade", 300 )
             if gridSize < 11 then
-                gridSize = gridSize +1
+                gridSize = gridSize + 1
+                gridLabel.text = string.format("%d Grid Lines", gridSize-1)
             end
         end
     end
-    
-    local decreaseWidth = function( event )
+
+    local decreaseSize = function( event )
         if event.phase == "release" then
             -- audio.play(btnSound)
             -- composer.gotoScene( "gameScene", "fade", 300 )
             if gridSize > 4 then
                 gridSize = gridSize - 1
+                gridLabel.text = string.format("%d Grid Lines", gridSize-1)
             end
         end
-
-        local IncreaseButton
-        local DecreaseButton
-
-         IncreaseButton = ui.newButton{
-		defaultX = 100,
-		defaultY = 100,
-		overX = 100,
-		overY = 100,
-		onEvent = increaseSize,
-		id = "IncreaseSize",
-		text = "Increase Grid Size",
-		font = native.systemfont,
-		textColor = { 255, 255, 255, 255 },
-		size = 18,
-		emboss = false
-	}
-
-        DecreaseButton = ui.newButton{
-		defaultX = 100,
-		defaultY = 100,
-		overX = 100,
-		overY = 100,
-		onEvent = decreaseSize,
-		id = "DecreaseSize",
-		text = "Decrase Grid Size",
-		font = native.systemfont,
-		textColor = { 255, 255, 255, 255 },
-		size = 18,
-		emboss = false
-	}
-
-    local gridLabel = display.newText("+ Grid size control -", WIDTH/2, 100, native.systemFont, 16)
-   
-  
-   
-
-
-    
-
-    
-
     end
 
+    local IncreaseButton
+    local DecreaseButton
+
+    IncreaseButton = ui.newButton{
+        onEvent = increaseSize,
+        id = "IncreaseSizeBtn",
+        text = "+",
+        font = native.systemfont,
+        textColor = { 255, 255, 255, 255 },
+        size = 18,
+        emboss = false
+    }
+    IncreaseButton.x = WIDTH/5
+    IncreaseButton.y = 100
+
+    DecreaseButton = ui.newButton{
+        onEvent = decreaseSize,
+        id = "DecreaseSizeBtn",
+        text = "-",
+        font = native.systemfont,
+        textColor = { 255, 255, 255, 255 },
+        size = 18,
+        emboss = false
+    }
+    DecreaseButton.x = WIDTH/5 + 24
+    DecreaseButton.y = 100
+
+    gridLabel = display.newText(sceneGroup, string.format("%d Grid Lines", gridSize-1), WIDTH/5*3, 100, native.systemFont, 16)
+end
+
+function scene:show( event )
+    local sceneGroup = self.view
+    print( "\n Settings: show event" )
 end
 
 function scene:hide()
