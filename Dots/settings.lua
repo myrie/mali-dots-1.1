@@ -11,6 +11,10 @@ local HEIGHT = display.contentHeight
 local gridLabel
 local gridSize
 
+function getGridLineText(gridSize)
+    return string.format("%d Grid Lines", gridSize-1);
+end
+
 function scene:create( event )
     local sceneGroup = self.view
     composer.removeScene( "loadgame" )
@@ -33,7 +37,7 @@ function scene:create( event )
             -- composer.gotoScene( "gameScene", "fade", 300 )
             if gridSize < 11 then
                 gridSize = gridSize + 1
-                gridLabel.text = string.format("%d Grid Lines", gridSize-1)
+                gridLabel.text = getGridLineText(gridSize)
             end
         end
     end
@@ -44,7 +48,7 @@ function scene:create( event )
             -- composer.gotoScene( "gameScene", "fade", 300 )
             if gridSize > 4 then
                 gridSize = gridSize - 1
-                gridLabel.text = string.format("%d Grid Lines", gridSize-1)
+                gridLabel.text = getGridLineText(gridSize)
             end
         end
     end
@@ -76,7 +80,7 @@ function scene:create( event )
     DecreaseButton.x = WIDTH/5 + 24
     DecreaseButton.y = 100
 
-    gridLabel = display.newText(sceneGroup, string.format("%d Grid Lines", gridSize-1), WIDTH/5*3, 100, native.systemFont, 16)
+    gridLabel = display.newText(sceneGroup, getGridLineText(gridSize), WIDTH/5*3, 100, native.systemFont, 16)
 end
 
 function scene:show( event )
