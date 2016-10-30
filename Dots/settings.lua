@@ -9,6 +9,11 @@ local scene = composer.newScene()
 local WIDTH = display.contentWidth
 local HEIGHT = display.contentHeight
 
+local gridLines = composer.getVariable("dotLines") or 5
+
+local linesGroup
+local linesLabel
+
 function scene:create( event )
     local sceneGroup = self.view
     composer.removeScene( "loadgame" )
@@ -19,38 +24,82 @@ function scene:create( event )
 
     -- Creates a label at the top of the screen
     local settingsLabel
-    settingsLabel = display.newText(sceneGroup, "Settings", 0, 0, native.systemfont, 24)
-    settingsLabel.x = WIDTH/2
-    settingsLabel.y = 0
+    settingsLabel = display.newText(sceneGroup, "Settings", WIDTH/2, 0, native.systemfont, 24)
+
+    linesGroup = display.newGroup()
+
+    local increaseWidth = function( event )
+         if event.phase == "release" then
+            -- audio.play(btnSound)
+            -- composer.gotoScene( "gameScene", "fade", 300 )
+            if gridLines < 11 then
+                gridLines = gridLines + 1
+                linesLabel.text = string.format("%d lines on the grid", gridLines-1)
+            end
+        end
+    end
+
+    local decreaseWidth = function( event )
+        if event.phase == "release" then
+            -- audio.play(btnSound)
+            -- composer.gotoScene( "gameScene", "fade", 300 )
+            if gridLines > 4 then
+                gridLines = gridLines - 1
+                linesLabel.text = string.format("%d lines on the grid", gridLines-1)
+            end
+        end
+    end
+
+    local incrementBtn
+
+    incrementBtn = ui.newButton{
+		-- defaultX = WIDTH/2,
+		-- defaultY = 36,
+		-- overX = WIDTH/2,
+		-- overY = 36,
+		onEvent = increaseWidth,
+		id = "IncrementLinesBtn",
+		text = "+",
+		font = native.systemfont,
+		textColor = { 255, 255, 255, 255 },
+		size = 24,
+		emboss = false
+	}
+    incrementBtn.x = WIDTH/5; 
+    incrementBtn.y = 36;
+    linesGroup:insert(incrementBtn)
+
+    local decrementBtn
+
+    decrementBtn = ui.newButton{
+		-- defaultX = WIDTH/2,
+		-- defaultY = 36,
+		-- overX = WIDTH/2,
+		-- overY = 36,
+		onEvent = decreaseWidth,
+		id = "DecrementLinesBtn",
+		text = "-",
+		font = native.systemfont,
+		textColor = { 255, 255, 255, 255 },
+		size = 24,
+		emboss = false
+	}
+    decrementBtn.x = WIDTH/5 + 24; 
+    decrementBtn.y = 36;
+    linesGroup:insert(decrementBtn)
+
+    linesLabel = display.newText(linesGroup, string.format("%d lines on the grid", gridLines-1), WIDTH/5*3, 36, native.systemfont, 18)
+
+    sceneGroup:insert(linesGroup)
 end
 
 function scene:show( event )
     local sceneGroup = self.view
     print( "\n Settings: show event" )
 
-    local playBtn
     
-    local gridWidth = 5
-    local gridHeight = 5
-    local increaseWidth = function( event )
-         if event.phase == "release" then
-            -- audio.play(btnSound)
-            -- composer.gotoScene( "gameScene", "fade", 300 )
-            if gridthWidth < 11 then
-                gridWidth = gridWidth +1
-            end
-        end
-    end
     
-    local decreaseWidth = function( event )
-        if event.phase == "release" then
-            -- audio.play(btnSound)
-            -- composer.gotoScene( "gameScene", "fade", 300 )
-            if gridthWidth > 2 then
-                gridWidth = gridWidth - 1
-            end
-        end
-    end
+    
 end
 
 function scene:hide()
