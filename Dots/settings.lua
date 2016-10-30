@@ -30,14 +30,14 @@ function scene:show( event )
 
     local playBtn
     
-    local gridWidth = 5
-    local gridHeight = 5
-    local increaseWidth = function( event )
+    local gridSize = 5
+    
+    local increaseSuze = function( event )
          if event.phase == "release" then
             -- audio.play(btnSound)
             -- composer.gotoScene( "gameScene", "fade", 300 )
-            if gridthWidth < 11 then
-                gridWidth = gridWidth +1
+            if gridSize < 11 then
+                gridSize = gridSize +1
             end
         end
     end
@@ -46,11 +46,54 @@ function scene:show( event )
         if event.phase == "release" then
             -- audio.play(btnSound)
             -- composer.gotoScene( "gameScene", "fade", 300 )
-            if gridthWidth > 2 then
-                gridWidth = gridWidth - 1
+            if gridSize > 4 then
+                gridSize = gridSize - 1
             end
         end
+
+        local IncreaseButton
+        local DecreaseButton
+
+         IncreaseButton = ui.newButton{
+		defaultX = 100,
+		defaultY = 100,
+		overX = 100,
+		overY = 100,
+		onEvent = increaseSize,
+		id = "IncreaseSize",
+		text = "Increase Grid Size",
+		font = native.systemfont,
+		textColor = { 255, 255, 255, 255 },
+		size = 18,
+		emboss = false
+	}
+
+        DecreaseButton = ui.newButton{
+		defaultX = 100,
+		defaultY = 100,
+		overX = 100,
+		overY = 100,
+		onEvent = decreaseSize,
+		id = "DecreaseSize",
+		text = "Decrase Grid Size",
+		font = native.systemfont,
+		textColor = { 255, 255, 255, 255 },
+		size = 18,
+		emboss = false
+	}
+
+    local gridLabel = display.newText("+ Grid size control -", WIDTH/2, 100, native.systemFont, 16)
+   
+  
+   
+
+
+    
+
+    
+
     end
+
 end
 
 function scene:hide()
