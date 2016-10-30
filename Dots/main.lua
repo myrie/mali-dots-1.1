@@ -13,7 +13,7 @@ local sfx = require('sfx')
 sfx.startBgm()
 
 -- Code to initialize the app can go here
-composer.setVariable("gridSize", 2)
+composer.setVariable("gridSize", 5)
 
 -- Now load the opening scene
 
