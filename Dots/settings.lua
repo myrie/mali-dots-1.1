@@ -53,8 +53,16 @@ function scene:create( event )
         end
     end
 
+    local returnToMenu = function( event )
+         if event.phase == "release" then
+             audio.play(btnSound)
+             composer.gotoScene( "mainmenu", "fade", 300 )
+        end
+    end
+
     local IncreaseButton
     local DecreaseButton
+    local MainMenuReturn
 
     IncreaseButton = ui.newButton{
         onEvent = increaseSize,
@@ -67,6 +75,7 @@ function scene:create( event )
     }
     IncreaseButton.x = WIDTH/5
     IncreaseButton.y = 100
+    sceneGroup:insert(IncreaseButton)
 
     DecreaseButton = ui.newButton{
         onEvent = decreaseSize,
@@ -79,8 +88,25 @@ function scene:create( event )
     }
     DecreaseButton.x = WIDTH/5 + 24
     DecreaseButton.y = 100
+    sceneGroup:insert(DecreaseButton)
+
+     MainMenuButton = ui.newButton{
+		
+		onEvent = returnToMenu,
+		id = "MainMenuButton",
+		text = "Main Menu",
+		font = native.systemfont,
+		textColor = { 255, 255, 255, 255 },
+		size = 18,
+		emboss = false
+	}
+    MainMenuButton.x = WIDTH/2
+    MainMenuButton.y = 500
+    sceneGroup:insert(MainMenuButton)
 
     gridLabel = display.newText(sceneGroup, getGridLineText(gridSize), WIDTH/5*3, 100, native.systemFont, 16)
+
+    composer.setVariable( "playSize", gridSize )
 end
 
 function scene:show( event )

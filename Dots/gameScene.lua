@@ -30,10 +30,7 @@ local SIZE = (math.min(HEIGHT, WIDTH))*0.9
 local LOCATION = {x = (WIDTH - SIZE)/2, y = (HEIGHT - SIZE)/2}
 
 -- set the number of lines in the grid
-local LINES = dots.LINES
-local GAPS = LINES-1
-local CELL_SIZE = SIZE/GAPS
-local EDGE_SIZE = 6
+
 
 -- -----------------------------------------------------------------------------------
 -- user interface stuff
@@ -144,6 +141,7 @@ function scene:create( event )
     local sceneGroup = self.view
     
     -- Code here runs when the scene is first created but has not yet appeared on screen
+	local LINES = composer.getVariable(playSize)
 
 	cells = {}
 	for i = 1, LINES-1 do
@@ -211,8 +209,12 @@ end
 
 -- show()
 function scene:show( event )
-
+	
     local sceneGroup = self.view
+	local LINES = composer.getVariable(gridSize)
+	local GAPS = LINES-1
+	local CELL_SIZE = SIZE/GAPS
+	local EDGE_SIZE = 6
     local phase = event.phase
 
     if ( phase == "will" ) then
