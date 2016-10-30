@@ -20,7 +20,6 @@ function scene:show( event )
 
     if ( phase == "will" ) then
         -- Code here runs when the scene is still off screen (but is about to come on screen)
-
         local winnerText = display.newText(sceneGroup, string.format("%s won the game!", event.params.winner), 0, 0, native.systemfont,24)
         winnerText.x = WIDTH/2
         winnerText.y = HEIGHT/2
@@ -29,6 +28,7 @@ function scene:show( event )
         scoreText.y = HEIGHT/2 + 24
     elseif ( phase == "did" ) then
         -- Code here runs when the scene is entirely on screen
+        audio.play(sfx.fanFare)
     end
 end
 
