@@ -10,7 +10,7 @@
 local composer = require( "composer" )
 local sfx = require('sfx')
 
-sfx.startBgm()
+
 
 -- Code to initialize the app can go here
 composer.setVariable("gridSize", 5)

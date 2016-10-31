@@ -241,7 +241,7 @@ function scene:show( event )
         -- Code here runs when the scene is still off screen (but is about to come on screen)
 		LINES = composer.getVariable('gridSize')
 		initializeGame(sceneGroup, LINES)
-		
+		sfx.startBgm()
     elseif ( phase == "did" ) then
         -- Code here runs when the scene is entirely on screen
     end
@@ -324,6 +324,7 @@ end
 function scene:destroy( event )
 
     local sceneGroup = self.view
+	sfx.stopBgm()
 
     -- Code here runs prior to the removal of scene's view
 

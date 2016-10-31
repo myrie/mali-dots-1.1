@@ -11,4 +11,10 @@ sfx.startBgm = function()
     audio.setVolume(0.25, { channel = 1 })
 end
 
+sfx.stopBgm = function()
+
+    audio.stop({channel = 1})
+
+end
+
 return sfx
