@@ -7,7 +7,7 @@ local WIDTH = display.contentWidth
 local HEIGHT = display.contentHeight
 
 local btnAnim
-local btnSound = audio.loadSound( "audio/btnSound.wav" )
+local btnSound = audio.loadSound( "audio/tapsound.wav" )
 
 -- Called when the scene's view does not exist:
 function scene:create( event )

@@ -1,6 +1,6 @@
 local sfx = {}
 
-sfx.ping = audio.loadSound( "audio/btnSound.wav" )
+sfx.ping = audio.loadSound( "audio/pingsound.wav" )
 sfx.click = audio.loadSound( "audio/tapsound.wav" )
 sfx.fanFare = audio.loadSound( "audio/gameover.wav" )
 sfx.bgm = audio.loadStream("audio/Calm World.mp3")

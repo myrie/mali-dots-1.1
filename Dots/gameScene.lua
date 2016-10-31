@@ -36,7 +36,7 @@ local GAPS = LINES-1
 local CELL_SIZE = SIZE/GAPS
 local EDGE_SIZE = 6
 
-local btnSound = sfx.ping
+local btnSound = sfx.click
 
 -- -----------------------------------------------------------------------------------
 -- user interface stuff
@@ -138,11 +138,13 @@ local function onTouchHorizontal(event)
 	if event.phase == "ended" then
 		local row = event.target.row
 		local col = event.target.col
+		audio.play(sfx.click)
 		if not horizontals[row][col].owner then
 			horizontals[row][col].owner = dots.currentPlayer
 			horizontals[row][col]:setFillColor(unpack(TAKEN_EDGE_COLOR))
 			dots:doHorizontal(row, col)
 			updateScores()
+			
 		end
 		return true
 	end
@@ -153,6 +155,7 @@ local function onTouchVertical(event)
 	if event.phase == "ended" then
 		local row = event.target.row
 		local col = event.target.col
+		audio.play(sfx.click)
 		if not verticals[col][row].owner then
 			verticals[col][row].owner = dots.currentPlayer
 			verticals[col][row]:setFillColor(unpack(TAKEN_EDGE_COLOR))

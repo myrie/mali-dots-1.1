@@ -5,6 +5,7 @@
 -- This is the code that manages the game
 --
 -----------------------------------------------------------------------------------------
+local sfx = require("sfx")
 
 local dots = {}
 
@@ -112,6 +113,7 @@ end
 function dots:capture( row, column )
 	self.cells[row][column].owner = self.currentPlayer
 	self.players[self.currentPlayer].score = self.players[self.currentPlayer].score + 1
+	audio.play(sfx.ping)
 
 	-- print(string.format("\n capture player: %s, row: %d, column: %d", self.currentPlayer, row, column))
 	for i = 1, #self.listeners do
